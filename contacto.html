@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contacto | Élan Advisor</title>
+  <meta name="description" content="Contacta a Élan Advisor para agendar a tua consultoria de imagem. Presencial em Abrantes ou online, por formulário, WhatsApp ou Instagram.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo">
+        <span class="logo-main">ÉLAN</span>
+        <span class="logo-sub">Advisor</span>
+      </a>
+
+      <nav>
+        <ul class="nav-list" id="navList">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="servicos.html">Serviços</a></li>
+          <li><a href="sobre.html">Sobre</a></li>
+          <li><a href="testemunhos.html">Testemunhos</a></li>
+          <li><a href="contacto.html" class="active">Contacto</a></li>
+        </ul>
+      </nav>
+
+      <a href="#formulario" class="btn btn-primary nav-cta">Agendar Consulta</a>
+
+      <button class="nav-toggle" id="navToggle" aria-label="Abrir menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+
+    <section class="page-hero">
+      <div class="container">
+        <span class="section-label">Vamos Falar</span>
+        <h1>Dá o primeiro passo para a tua transformação</h1>
+        <p>Escreve-nos sobre o que procuras e responderemos o mais brevemente possível — presencial em Abrantes ou online, onde estiveres.</p>
+      </div>
+    </section>
+
+    <section class="section-cream" id="formulario">
+      <div class="container">
+        <div class="contact-layout">
+
+          <div>
+            <div class="form-success" id="formSuccess">
+              Obrigado pela tua mensagem! Entraremos em contacto brevemente. 💛
+            </div>
+
+            <form
+              name="contact"
+              method="POST"
+              data-netlify="true"
+              netlify-honeypot="bot-field"
+              class="contact-form reveal"
+              id="contactForm"
+              action="/contacto.html?success=true"
+            >
+              <input type="hidden" name="form-name" value="contact">
+              <p style="display:none;">
+                <label>Não preencher se és humana: <input name="bot-field"></label>
+              </p>
+
+              <div class="form-row">
+                <div class="form-group" id="group-nome">
+                  <label for="nome">Nome*</label>
+                  <input type="text" id="nome" name="nome" required>
+                  <span class="form-error-text">Por favor indica o teu nome.</span>
+                </div>
+                <div class="form-group" id="group-email">
+                  <label for="email">Email*</label>
+                  <input type="email" id="email" name="email" required>
+                  <span class="form-error-text">Por favor indica um email válido.</span>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group" id="group-telefone">
+                  <label for="telefone">Telefone</label>
+                  <input type="tel" id="telefone" name="telefone">
+                </div>
+                <div class="form-group" id="group-servico">
+                  <label for="servico">Serviço de interesse</label>
+                  <select id="servico" name="servico">
+                    <option value="">Selecionar...</option>
+                    <option value="Estilo Pessoal">Estilo Pessoal</option>
+                    <option value="Coloração Pessoal">Coloração Pessoal</option>
+                    <option value="Análise de Biótipo">Análise de Biótipo</option>
+                    <option value="Guarda-Roupa / Personal Shopper">Guarda-Roupa / Personal Shopper</option>
+                    <option value="Consultoria de Noivas">Consultoria de Noivas</option>
+                    <option value="Imagem Corporativa">Imagem Corporativa</option>
+                    <option value="Mala de Viagem">Mala de Viagem</option>
+                    <option value="Ainda não sei">Ainda não sei</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group" id="group-mensagem">
+                <label for="mensagem">Mensagem*</label>
+                <textarea id="mensagem" name="mensagem" rows="5" required placeholder="Conta-nos um pouco sobre ti e o que procuras..."></textarea>
+                <span class="form-error-text">Por favor escreve a tua mensagem.</span>
+              </div>
+
+              <button type="submit" class="btn btn-primary btn-block">Enviar Mensagem</button>
+            </form>
+          </div>
+
+          <div>
+            <div class="contact-info-card reveal">
+              <h3>Informação de Contacto</h3>
+              <div class="contact-info-row">
+                <span class="icon">📍</span>
+                <div>
+                  <strong>Localização</strong>
+                  <p>Abrantes, Portugal — [morada exata a preencher]</p>
+                </div>
+              </div>
+              <div class="contact-info-row">
+                <span class="icon">✉️</span>
+                <div>
+                  <strong>Email</strong>
+                  <p>[email a preencher]</p>
+                </div>
+              </div>
+              <div class="contact-info-row">
+                <span class="icon">📞</span>
+                <div>
+                  <strong>Telefone / WhatsApp</strong>
+                  <p>[telefone a preencher]</p>
+                </div>
+              </div>
+              <div class="contact-info-row">
+                <span class="icon">🕒</span>
+                <div>
+                  <strong>Atendimento</strong>
+                  <p>Presencial e online, com marcação prévia</p>
+                </div>
+              </div>
+
+              <div class="contact-quick-actions">
+                <a href="https://wa.me/351000000000" target="_blank" rel="noopener" class="btn btn-whatsapp btn-block">Falar no WhatsApp</a>
+                <a href="https://www.instagram.com/elan_imagem/" target="_blank" rel="noopener" class="btn btn-instagram btn-block">Enviar DM no Instagram</a>
+              </div>
+            </div>
+
+            <div class="map-placeholder reveal">
+              <span style="color: var(--color-text-muted); font-size: 0.9rem;">[Mapa / embed de localização — Abrantes, Portugal]</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="logo" style="text-align:left;">
+            <span class="logo-main">ÉLAN</span>
+            <span class="logo-sub">Advisor</span>
+          </a>
+          <p>Consultoria de imagem em Abrantes, Portugal. Presencial e online. Alinhamos quem és com a forma como te apresentas ao mundo.</p>
+          <div class="footer-social">
+            <a href="https://www.instagram.com/elan_imagem/" target="_blank" rel="noopener" aria-label="Instagram">IG</a>
+            <a href="https://wa.me/351000000000" target="_blank" rel="noopener" aria-label="WhatsApp">WA</a>
+          </div>
+        </div>
+        <div>
+          <div class="footer-heading">Navegação</div>
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="servicos.html">Serviços</a></li>
+            <li><a href="sobre.html">Sobre</a></li>
+            <li><a href="testemunhos.html">Testemunhos</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-heading">Serviços</div>
+          <ul class="footer-links">
+            <li><a href="servicos.html#estilo">Estilo Pessoal</a></li>
+            <li><a href="servicos.html#coloracao">Coloração Pessoal</a></li>
+            <li><a href="servicos.html#biotipo">Análise de Biótipo</a></li>
+            <li><a href="servicos.html#noivas">Consultoria de Noivas</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-heading">Contacto</div>
+          <ul class="footer-links">
+            <li>Abrantes, Portugal</li>
+            <li>[email a preencher]</li>
+            <li>[telefone a preencher]</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 Élan Advisor. Todos os direitos reservados.</span>
+        <span>Consultoria de Imagem</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

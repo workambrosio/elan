@@ -1,0 +1,110 @@
+/* ==========================================================================
+   Élan Advisor — JS partilhado
+   Menu mobile, scroll reveal e validação do formulário de contacto
+   ========================================================================== */
+
+document.addEventListener("DOMContentLoaded", () => {
+  initMobileNav();
+  initScrollReveal();
+  initContactForm();
+  initSuccessBanner();
+});
+
+/* ---------- Menu mobile ---------- */
+function initMobileNav() {
+  const toggle = document.getElementById("navToggle");
+  const navList = document.getElementById("navList");
+
+  if (!toggle || !navList) return;
+
+  toggle.addEventListener("click", () => {
+    const isOpen = navList.classList.toggle("open");
+    toggle.classList.toggle("open", isOpen);
+    toggle.setAttribute("aria-expanded", String(isOpen));
+  });
+
+  navList.querySelectorAll("a").forEach((link) => {
+    link.addEventListener("click", () => {
+      navList.classList.remove("open");
+      toggle.classList.remove("open");
+      toggle.setAttribute("aria-expanded", "false");
+    });
+  });
+}
+
+/* ---------- Scroll reveal ---------- */
+function initScrollReveal() {
+  const revealEls = document.querySelectorAll(".reveal");
+
+  if (!revealEls.length) return;
+
+  if (!("IntersectionObserver" in window)) {
+    revealEls.forEach((el) => el.classList.add("is-visible"));
+    return;
+  }
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.15, rootMargin: "0px 0px -40px 0px" }
+  );
+
+  revealEls.forEach((el) => observer.observe(el));
+}
+
+/* ---------- Validação do formulário de contacto ---------- */
+function initContactForm() {
+  const form = document.getElementById("contactForm");
+  if (!form) return;
+
+  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  form.addEventListener("submit", (event) => {
+    let isValid = true;
+
+    const requiredFields = [
+      { id: "nome", groupId: "group-nome", check: (v) => v.trim().length > 0 },
+      { id: "email", groupId: "group-email", check: (v) => emailPattern.test(v.trim()) },
+      { id: "mensagem", groupId: "group-mensagem", check: (v) => v.trim().length > 0 },
+    ];
+
+    requiredFields.forEach(({ id, groupId, check }) => {
+      const field = document.getElementById(id);
+      const group = document.getElementById(groupId);
+      if (!field || !group) return;
+
+      const fieldValid = check(field.value);
+      group.classList.toggle("has-error", !fieldValid);
+      if (!fieldValid) isValid = false;
+    });
+
+    if (!isValid) {
+      event.preventDefault();
+    }
+  });
+
+  // Remove error state as soon as the visitor starts fixing a field
+  form.querySelectorAll("input, textarea, select").forEach((field) => {
+    field.addEventListener("input", () => {
+      const group = field.closest(".form-group");
+      if (group) group.classList.remove("has-error");
+    });
+  });
+}
+
+/* ---------- Mensagem de sucesso (após redirect do Netlify Forms) ---------- */
+function initSuccessBanner() {
+  const params = new URLSearchParams(window.location.search);
+  const successBanner = document.getElementById("formSuccess");
+
+  if (params.get("success") === "true" && successBanner) {
+    successBanner.classList.add("visible");
+    successBanner.scrollIntoView({ behavior: "smooth", block: "center" });
+  }
+}
