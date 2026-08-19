@@ -17,18 +17,41 @@ function initMobileNav() {
 
   if (!toggle || !navList) return;
 
+  const overlay = document.createElement("div");
+  overlay.className = "nav-overlay";
+  overlay.id = "navOverlay";
+  document.body.appendChild(overlay);
+
+  const closeNav = () => {
+    navList.classList.remove("open");
+    toggle.classList.remove("open");
+    overlay.classList.remove("open");
+    document.body.classList.remove("nav-open");
+    toggle.setAttribute("aria-expanded", "false");
+    toggle.setAttribute("aria-label", "Abrir menu");
+  };
+
+  const openNav = () => {
+    navList.classList.add("open");
+    toggle.classList.add("open");
+    overlay.classList.add("open");
+    document.body.classList.add("nav-open");
+    toggle.setAttribute("aria-expanded", "true");
+    toggle.setAttribute("aria-label", "Fechar menu");
+  };
+
   toggle.addEventListener("click", () => {
-    const isOpen = navList.classList.toggle("open");
-    toggle.classList.toggle("open", isOpen);
-    toggle.setAttribute("aria-expanded", String(isOpen));
+    if (navList.classList.contains("open")) {
+      closeNav();
+    } else {
+      openNav();
+    }
   });
 
+  overlay.addEventListener("click", closeNav);
+
   navList.querySelectorAll("a").forEach((link) => {
-    link.addEventListener("click", () => {
-      navList.classList.remove("open");
-      toggle.classList.remove("open");
-      toggle.setAttribute("aria-expanded", "false");
-    });
+    link.addEventListener("click", closeNav);
   });
 }
 
