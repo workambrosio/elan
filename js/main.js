@@ -19,6 +19,7 @@ function initMobileNav() {
 
   if (!toggle || !navList) return;
 
+  const navHost = navList.parentElement;
   const overlay = document.createElement("div");
   overlay.className = "nav-overlay";
   overlay.id = "navOverlay";
@@ -31,6 +32,9 @@ function initMobileNav() {
     document.body.classList.remove("nav-open");
     toggle.setAttribute("aria-expanded", "false");
     toggle.setAttribute("aria-label", "Abrir menu");
+    if (window.matchMedia("(max-width: 860px)").matches) {
+      navList.setAttribute("aria-hidden", "true");
+    }
   };
 
   const openNav = () => {
@@ -38,9 +42,32 @@ function initMobileNav() {
     toggle.classList.add("open");
     overlay.classList.add("open");
     document.body.classList.add("nav-open");
+    navList.setAttribute("aria-hidden", "false");
     toggle.setAttribute("aria-expanded", "true");
     toggle.setAttribute("aria-label", "Fechar menu");
   };
+
+  const syncNavPlacement = () => {
+    const isMobile = window.matchMedia("(max-width: 860px)").matches;
+    if (isMobile) {
+      if (navList.parentElement !== document.body) {
+        document.body.appendChild(navList);
+      }
+      if (!navList.classList.contains("open")) {
+        navList.setAttribute("aria-hidden", "true");
+      }
+    } else {
+      closeNav();
+      if (navHost && navList.parentElement !== navHost) {
+        navHost.appendChild(navList);
+      }
+      navList.removeAttribute("aria-hidden");
+    }
+  };
+
+  toggle.setAttribute("aria-expanded", "false");
+  syncNavPlacement();
+  window.matchMedia("(max-width: 860px)").addEventListener("change", syncNavPlacement);
 
   toggle.addEventListener("click", () => {
     if (navList.classList.contains("open")) {
