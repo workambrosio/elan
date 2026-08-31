@@ -8,6 +8,8 @@ document.addEventListener("DOMContentLoaded", () => {
   initScrollReveal();
   initContactForm();
   initSuccessBanner();
+  initFaq();
+  initMobileCta();
 });
 
 /* ---------- Menu mobile ---------- */
@@ -130,4 +132,46 @@ function initSuccessBanner() {
     successBanner.classList.add("visible");
     successBanner.scrollIntoView({ behavior: "smooth", block: "center" });
   }
+}
+
+/* ---------- FAQ: um item aberto de cada vez ---------- */
+function initFaq() {
+  const items = document.querySelectorAll(".faq-item");
+  if (!items.length) return;
+
+  items.forEach((item) => {
+    item.addEventListener("toggle", () => {
+      if (!item.open) return;
+      items.forEach((other) => {
+        if (other !== item) other.open = false;
+      });
+      item.scrollIntoView({ behavior: "smooth", block: "center" });
+    });
+  });
+}
+
+/* ---------- CTA sticky no telemóvel ---------- */
+function initMobileCta() {
+  if (document.querySelector(".mobile-cta")) return;
+
+  const isContact = /contacto\.html/i.test(window.location.pathname);
+  const usesRootPaths = Boolean(
+    document.querySelector('link[rel="stylesheet"][href^="/"]')
+  );
+  const bookHref = isContact
+    ? "#formulario"
+    : usesRootPaths
+      ? "/contacto.html"
+      : "contacto.html";
+
+  const bar = document.createElement("div");
+  bar.className = "mobile-cta";
+  bar.setAttribute("role", "navigation");
+  bar.setAttribute("aria-label", "Contacto rápido");
+  bar.innerHTML =
+    '<a href="' + bookHref + '" class="btn btn-primary">Agendar Consulta</a>' +
+    '<a href="https://wa.me/351000000000" target="_blank" rel="noopener" class="btn btn-whatsapp">WhatsApp</a>';
+
+  document.body.appendChild(bar);
+  document.body.classList.add("has-mobile-cta");
 }
