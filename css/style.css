@@ -409,8 +409,8 @@ h1, h2, h3, h4 {
   position: relative;
   z-index: 2;
   max-width: 720px;
-  padding: 140px 24px 100px;
-  margin: 0 auto;
+  padding: 24px 24px 80px;
+  margin: -40px auto 0;
   text-align: center;
 }
 
@@ -558,12 +558,6 @@ section {
   box-shadow: 0 18px 40px rgba(33, 78, 75, 0.12);
 }
 
-.pillar-icon {
-  font-size: 2.2rem;
-  margin-bottom: 18px;
-  display: block;
-}
-
 .pillar-card h3 {
   font-size: 1.15rem;
   color: var(--color-dark-green);
@@ -619,10 +613,14 @@ section {
 }
 
 .split-text ul li::before {
-  content: "✦";
+  content: "";
   position: absolute;
   left: 0;
-  color: var(--color-gold);
+  top: 0.55em;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-gold);
 }
 
 @media (max-width: 860px) {
@@ -1101,7 +1099,30 @@ section {
 .contact-quick-actions {
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.contact-quick-actions .btn {
+  background: transparent;
+  border-color: rgba(196, 158, 95, 0.55);
+  color: var(--color-cream);
+  gap: 10px;
+}
+
+.contact-quick-actions .btn svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  fill: currentColor;
+}
+
+.contact-quick-actions .btn:hover,
+.contact-quick-actions .btn:focus-visible {
+  background-color: var(--color-gold);
+  border-color: var(--color-gold);
+  color: var(--color-dark-green);
+  transform: translateY(-2px);
 }
 
 .map-placeholder {
@@ -1231,6 +1252,95 @@ section {
   transform: translateY(0);
 }
 
+/* ---------- Page-load intro ---------- */
+@keyframes introFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes introHeroImage {
+  from {
+    opacity: 0;
+    transform: scale(1.1);
+  }
+  to {
+    opacity: 0.45;
+    transform: scale(1);
+  }
+}
+
+@keyframes introFade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.header-inner {
+  animation: introFade 1.2s ease both;
+}
+
+.hero-bg {
+  animation: introHeroImage 1.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.hero-overlay {
+  animation: introFade 1.85s ease both;
+}
+
+.hero-eyebrow {
+  animation: introFadeUp 0.95s cubic-bezier(0.22, 1, 0.36, 1) 0.28s both;
+}
+
+.hero-title {
+  animation: introFadeUp 1s cubic-bezier(0.22, 1, 0.36, 1) 0.42s both;
+}
+
+.hero-text {
+  animation: introFadeUp 0.95s cubic-bezier(0.22, 1, 0.36, 1) 0.58s both;
+}
+
+.hero-actions {
+  animation: introFadeUp 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.74s both;
+}
+
+.page-hero .section-label {
+  animation: introFadeUp 0.85s cubic-bezier(0.22, 1, 0.36, 1) 0.12s both;
+}
+
+.page-hero h1 {
+  animation: introFadeUp 0.95s cubic-bezier(0.22, 1, 0.36, 1) 0.24s both;
+}
+
+.page-hero p {
+  animation: introFadeUp 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.38s both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .header-inner,
+  .hero-bg,
+  .hero-overlay,
+  .hero-eyebrow,
+  .hero-title,
+  .hero-text,
+  .hero-actions,
+  .page-hero .section-label,
+  .page-hero h1,
+  .page-hero p {
+    animation: none;
+  }
+}
+
 /* ---------- Placeholder note badge (dev only) ---------- */
 .placeholder-note {
   font-size: 0.7rem;
@@ -1281,7 +1391,8 @@ body.nav-open {
   }
 
   .hero-content {
-    padding: 110px 18px 48px;
+    padding: 28px 18px 48px;
+    margin: 0 auto;
     text-align: left;
     max-width: 100%;
   }
